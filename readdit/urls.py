@@ -17,6 +17,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+# Importing app views
+import accounts.views
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^create_account/', accounts.views.create_account, name="create_account")
 ]
