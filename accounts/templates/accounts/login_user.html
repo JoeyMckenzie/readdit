@@ -2,32 +2,34 @@
 {% block content %}
 
 
+
 {% if error %}
 {{ error }}
 {% endif %}
 
-<form method="POST" action="{% url 'accounts:create_account' %}">
+<form method="POST" action="{% url 'accounts:login_user' %}">
     {% csrf_token %}
 
     <div class="container">
-        <h3>Sign Up</h3>
+        <h3>Login</h3>
+        {% if request.GET.next %}
+        <input type="hidden" name="next" value={{ request.GET.next }} />
+        {% endif %}
+
+        <br/>
         <label for="username">Username:</label>
         <br/>
         <input type="text" name="username" />
+        <br/>
         <br/>
         
         <label for="password">Password:</label>
         <br/>
         <input type="password" name="password" />
         <br/>
-        
-        <label for="password_valid">Confirm Password</label>
         <br/>
-        <input type="password" name="password_valid"/>
-        <br/>
-        <br/>    
         
-        <button class="btn btn-primary" type="submit">Sign up!</button>
+        <button class="btn btn-primary" type="submit">Login</button>
     </div>
 </form>
 

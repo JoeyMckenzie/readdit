@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <h1>Readdit</h1>
+
+    <a class="btn btn-primary" ref="{% url 'posts:create_post' %}">New Post</a>
+
+    <br/>
+    <br/>
+
+    {% for post in posts.all %}
+
+    <table>
+        <tr>
+            <td class="text-center" style="padding-right:10px;"><a href="#" onclick="document.getElementById('upvote{{ post.id}}').submit()"><span id="upvote" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a><br/>{{ post.votes_total }}<br/><a href="#" onclick="document.getElementById('downvote{{ post.id}}').submit()"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></td>
+            <td><a href="{{ post.url }}">{{ post.title }}</a><br/>{{ post.pretty_pub_date }} by <a href="{% url 'posts:posts_by_user' %}">{{ post.author.username }}</a></td>
+        </tr>
+    </table>
+
+    <form id="upvote{{ post.id }}" method="POST" action="{% url 'posts:upvote' post.id %}">
+        {% csrf_token %}
+        <input type="hidden">
+    </form>
+
+    <form id="downvote{{ post.id }}"method="POST" action="{% url 'posts:downvote' post.id %}">
+        {% csrf_token %}
+        <input type="hidden">
+    </form> 
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
+
