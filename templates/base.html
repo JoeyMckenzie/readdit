@@ -43,6 +43,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
               {% if user.is_authenticated %}
+                <li><a href="#" onclick="document.getElementById('logout').submit()">Logout</a></li>
                 <form id="logout" method="POST" action="{% url 'accounts:logout_user' %}">
                     {% csrf_token %}
                     <input type="hidden">

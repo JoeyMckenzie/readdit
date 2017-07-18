@@ -3,13 +3,14 @@
 
 <div class="container">
     {% comment %}<h3>Posts by {{ post.author.username }}</h3>{% endcomment %}
+    <h3>Posts by {{ author.username }}</h3>
     
     {% for post in posts.all %}
 
     <table>
         <tr>
             <td class="text-center" style="padding-right:10px;"><a href="#" onclick="document.getElementById('upvote{{ post.id}}').submit()"><span id="upvote" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span></a><br/>{{ post.votes_total }}<br/><a href="#" onclick="document.getElementById('downvote{{ post.id}}').submit()"><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></a></td>
-            <td><a href="{{ post.url }}">{{ post.title }}</a><br/>{{ post.pretty_pub_date }} by {{ post.author.username }}</td>
+            <td><a href="{{ post.url }}">{{ post.title }}</a><br/>{{ post.pretty_pub_date }} by <a href="{% url 'posts:posts_by_user' post.author.id %}">{{ post.author.username }}</a></td>
         </tr>
     </table>
 
